@@ -11,10 +11,10 @@ export class TasksService {
   constructor(
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
-  ) { }
+  ) {}
 
-  getTasks(filterDto: GetTasksFilterDto) {
-
+  async getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.taskRepository.getTasks(filterDto);
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
@@ -39,7 +39,6 @@ export class TasksService {
     }
   }
 
- 
   async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
     const task = await this.getTaskById(id);
 

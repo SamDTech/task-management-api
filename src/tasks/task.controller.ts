@@ -23,13 +23,16 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto){
+  getTasks(
+    @Query(ValidationPipe) filterDto: GetTasksFilterDto,
+  ): Promise<Task[]> {
     return this.tasksService.getTasks(filterDto);
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
-  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+  createTask(
+    @Body(ValidationPipe) createTaskDto: CreateTaskDto,
+  ): Promise<Task> {
     return this.tasksService.createTask(createTaskDto);
   }
 
