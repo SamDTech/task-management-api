@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -14,6 +15,7 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatusValidationPipes } from './pipes/task-status-validation.pipes';
+import { Task } from './task.entity';
 
 @Controller('tasks')
 export class TasksController {
@@ -33,10 +35,10 @@ export class TasksController {
   //   return this.tasksService.createTask(createTaskDto);
   // }
 
-  // @Get('/:id')
-  // getTask(@Param('id') id: string): Task {
-  //   return this.tasksService.getTaskById(id);
-  // }
+  @Get('/:id')
+  getTask(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+    return this.tasksService.getTaskById(id);
+  }
 
   // @Patch('/:id/status')
   // @UsePipes(TaskStatusValidationPipes)
