@@ -7,7 +7,7 @@ export class AuthCredentialDto {
   username: string;
 
   @IsString()
-  @MinLength(6)
+  @MinLength(6, { message: 'password must be longer than 5 characters' })
   @MaxLength(20)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'password must contain a character, uppercase and lowercase',
